@@ -8,10 +8,11 @@ const fs = require('fs')
 const ghPages = require('gulp-gh-pages')
 const browserSync = require('browser-sync').create()
 
-const buildDir = `<%= dist %>`;
+const buildDir = `<%= build %>`;
 const sourceDir = `<%= src %>`;
 const assetsDir = `<%= assets %>`;
-const deployBrand = `<%= branch %>`;
+const deployBranch = `<%= branch %>`;
+
 
 let twigPageCompile = function () {
     pages = [];
@@ -40,7 +41,7 @@ let filterDataTwig = function (file, t) {
     fileName = fileName.split("/");
     fileName.pop();
     fileName = fileName.join("/")
-    let fileDataPath = './${sourceDir}/pages/' + file.relative.replace(/.twig([^.twig]*)$/, ".js" + '$1')
+    let fileDataPath = `./${sourceDir}/pages/` + file.relative.replace(/.twig([^.twig]*)$/, ".js" + '$1')
     let init = {
         base: `./${sourceDir}`
     }
@@ -58,7 +59,7 @@ function watchFile() {
         }
     })
     watch([`./${buildDir}/**/*`]).on("change", browserSync.reload)
-    watch([`./${sourceDir}/**/*.twig`, `./${sourceDir}/**/*.html`, `./app/pages/*/.js`], twigPageCompile)
+    watch([`./${sourceDir}/**/*.twig`, `./${sourceDir}/**/*.html`, `./${sourceDir}/pages/**/*.js`], twigPageCompile)
     watch([`./${sourceDir}/${assetsDir}/scss/**/*.scss`], sassAssetComplile)
     watch([`./${sourceDir}/${assetsDir}/js/**/*.js`], jsAssetCopy)
 }
@@ -66,7 +67,7 @@ function watchFile() {
 function deployGhPages() {
     return src(`./${buildDir}`)
             .pipe(ghPages({
-                branch: deployBrand
+                branch: deployBranch
             }))
 }
 
