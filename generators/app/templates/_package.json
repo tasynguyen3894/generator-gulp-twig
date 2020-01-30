@@ -1,0 +1,23 @@
+{
+    "name": "<%= project_name %>",
+    "version": "<%= project_version %>",
+    "main": "<%= project_main %>",
+    "license": "<%= project_license %>",
+    "devDependencies": {
+      "gulp": "^4.0.2"
+    },
+    "script": {
+        "start": "gulp watch",
+        "build": "gulp build",
+        "deploy": "gulp deploy"
+    },
+    "dependencies": {
+      "browser-sync": "^2.26.7",
+      "del": "^5.1.0",
+      "gulp-gh-pages": "^0.5.4",
+      "gulp-sass": "^4.0.2",
+      "gulp-tap": "^2.0.0",
+      "gulp-twig": "^1.2.0"
+    }
+  }
+  
