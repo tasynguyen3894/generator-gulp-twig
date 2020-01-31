@@ -101,7 +101,23 @@ module.exports = class extends Generator {
             this.destinationPath(`${this.answers.src}/pages/page_2.js`)
         )
     }
-    install() {
-        this.npmInstall();
+    async install() {
+        const answers = await this.prompt([
+            {
+                type: "list",
+                name: "install",
+                message: "Yarn or Npm?",
+                choices: ["Yarn", "Npm", "Install later"]
+            }
+        ])
+        if(answers.install !== "Install later") {
+            this.log("Installing......");
+            if(answers.install === "Npm") {
+                await this.npmInstall();
+            }
+            if(answers.install === "Yarn") {
+                await this.yarnInstall();
+            }
+        }
     }
 };

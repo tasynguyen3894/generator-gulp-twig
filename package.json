@@ -1,6 +1,6 @@
 {
   "name": "generator-gulp-twig",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": "https://github.com/tasynguyen3894/generator-gulp-twig.git",
   "author": "tasynguyen3894 <thaisang.nguyen3894@gmail.com>",
