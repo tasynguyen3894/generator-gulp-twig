@@ -56,6 +56,13 @@ module.exports = class extends Generator {
     }
     writing() {
         this.fs.copyTpl(
+            this.templatePath('_gitignore'),
+            this.destinationPath('.gitignore'),
+            {
+                build: this.answers.build
+            }
+        )
+        this.fs.copyTpl(
             this.templatePath('gulpfile.js'),
             this.destinationPath('gulpfile.js'),
             {
