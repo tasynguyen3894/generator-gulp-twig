@@ -82,6 +82,10 @@ module.exports = class extends Generator {
                 project_version: this.answers.project_version
             }
         )
+        this.fs.copyTpl(
+            this.templatePath('buildignore.js'),
+            this.destinationPath('buildignore.js')
+        )
 
         this.fs.copyTpl(
             this.templatePath('src/assets/scss/style.scss'),
