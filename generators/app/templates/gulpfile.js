@@ -12,7 +12,7 @@ const buildDir = `<%= build %>`;
 const sourceDir = `<%= src %>`;
 const assetsDir = `<%= assets %>`;
 const deployBranch = `<%= branch %>`;
-
+const buildIgnore = require("./buildignore")
 
 let twigPageCompile = function () {
     pages = [];
@@ -72,7 +72,11 @@ function deployGhPages() {
 }
 
 function clearTmp() {
-    return del([`${buildDir}`])
+    let delList = [`${buildDir}/**/*`];
+    buildIgnore.forEach(element => {
+        delList.push(`!${buildDir}/${element}`)
+    });
+    return del(delList)
 }
 
 function requireUncached(module){
